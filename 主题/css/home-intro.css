@@ -1,0 +1,318 @@
+/* ホーム開場アニメーション 開始 */
+body.intro-lock {
+  overflow: hidden;
+}
+.home-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+}
+.home-intro-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(80, 80, 80, 0.9); /* 灰色半透明膜 */
+  backdrop-filter: none;                 /* 不再模糊正文 */
+  opacity: 1;
+  transition: opacity 1.1s ease;
+  cursor: pointer;
+}
+.home-intro.is-closing .home-intro-backdrop {
+  opacity: 0;
+}
+
+.home-intro-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.home-intro-cluster {
+  --fly-x: 0px;
+  --fly-y: 0px;
+  --fly-scale: 0.16;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  width: min(94vw, 1280px);
+  height: min(88vh, 760px);
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: center center;
+  transition:
+    transform 1.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 1.05s ease,
+    filter 1.05s ease;
+}
+
+.home-intro-cluster.is-flying {
+  transform:
+    translate(
+      calc(-50% + var(--fly-x)),
+      calc(-50% + var(--fly-y))
+    )
+    scale(var(--fly-scale));
+  opacity: 0;
+  filter: blur(5px);
+}
+
+/* ===== 中央大 logo 区 ===== */
+.intro-logo-sequence {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 800px;
+  max-width: 82vw;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  pointer-events: auto;
+}
+.intro-logo-frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: auto;
+  transform: translate(-50%, -50%) scale(0.96);
+  opacity: 0;
+  filter: blur(8px);
+  transition:
+    opacity 0.56s ease,
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.56s ease;
+  pointer-events: none;
+}
+.intro-logo-frame.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  filter: blur(0);
+}
+
+/* 为了让容器有高度，避免 absolute 造成塌陷 */
+.intro-logo-sequence::before {
+  content: "";
+  display: block;
+  padding-top: 39.5%;
+}
+
+/* ===== 周围小图 ===== */
+.intro-orbit-items {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+.intro-orbit-item {
+  position: absolute;
+  pointer-events: auto;
+}
+.intro-orbit-card {
+  width: 160px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(177, 141, 97, 0.24);
+  box-shadow:
+    0 14px 28px rgba(120, 80, 40, 0.14),
+    0 0 0 1px rgba(255,255,255,0.35) inset;
+
+  opacity: 0;
+  transform: translateY(24px) scale(0.9);
+  filter: blur(10px);
+  transition:
+    opacity 0.52s ease,
+    transform 0.68s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.52s ease;
+}
+
+.intro-orbit-item.is-visible .intro-orbit-card {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+.intro-orbit-card img {
+  display: block;
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.intro-orbit-card p {
+  margin: 0;
+  padding: 10px 10px 12px;
+  text-align: center;
+  color: #5d4b3b;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+/* 不规则位置，可以调整 */
+.intro-item-pos-1 {
+  left: 8%;
+  top: 10%;
+}
+.intro-item-pos-2 {
+  right: 10%;
+  top: 12%;
+}
+.intro-item-pos-3 {
+  left: 4%;
+  top: 46%;
+}
+.intro-item-pos-4 {
+  right: 4%;
+  top: 48%;
+}
+.intro-item-pos-5 {
+  left: 18%;
+  bottom: 7%;
+}
+.intro-item-pos-6 {
+  right: 16%;
+  bottom: 9%;
+}
+
+/* 给每个位置一点不同的初始方向感 */
+.intro-item-pos-1 .intro-orbit-card {
+  transform: translate(-22px, 18px) scale(0.9) rotate(-4deg);
+}
+.intro-item-pos-2 .intro-orbit-card {
+  transform: translate(22px, 18px) scale(0.9) rotate(4deg);
+}
+.intro-item-pos-3 .intro-orbit-card {
+  transform: translate(-26px, 0) scale(0.9) rotate(-3deg);
+}
+.intro-item-pos-4 .intro-orbit-card {
+  transform: translate(26px, 0) scale(0.9) rotate(3deg);
+}
+.intro-item-pos-5 .intro-orbit-card {
+  transform: translate(-18px, 20px) scale(0.9) rotate(-2deg);
+}
+.intro-item-pos-6 .intro-orbit-card {
+  transform: translate(18px, 20px) scale(0.9) rotate(2deg);
+}
+
+.intro-orbit-item.is-visible .intro-orbit-card {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* 首页动画：点击跳过提示文，放在 logo 下方 */
+.intro-skip-hint {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 210px);
+  z-index: 30;
+
+  display: block;
+  width: fit-content;
+  max-width: min(80vw, 500px);
+  margin: 0;
+  padding: 4px 12px;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.72);
+  color: #d85b8c;
+
+  font-size: clamp(11px, 0.95vw, 14px);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+  text-align: center;
+
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(216, 91, 140, 0.16);
+
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* 防止提示文被动画过程隐藏 */
+.home-intro-cluster .intro-skip-hint {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 992px) {
+  .intro-trigger-link {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .site-nav {
+    min-height: 64px;
+  }
+
+  .site-brand {
+    height: 64px;
+  }
+
+  .site-brand-logo {
+    height: 64px;
+  }
+
+  .navbar-collapse {
+    padding: 12px 0 8px;
+  }
+
+  .site-nav-link {
+    display: inline-flex;
+    margin: 3px 0;
+  }
+  .site-dropdown {
+    margin: 4px 0 10px;
+    padding: 8px;
+    border-radius: 14px;
+    box-shadow: none;
+  }
+  .member-icon-link {
+    margin: 8px 0 0;
+  }
+
+ .intro-trigger-link {
+    display: none !important;
+  }
+}
+
+/* 手机端稍微缩小 */
+@media (max-width: 767.98px) {
+  .home-intro {
+    display: none !important;
+  }
+
+  .intro-skip-hint {
+    display: none !important;
+  }
+
+  .intro-logo-sequence {
+    max-width: 92vw;
+  }
+
+  .intro-orbit-card {
+    width: 118px;
+  }
+
+  .intro-orbit-card img {
+    height: 74px;
+  }
+
+  .intro-orbit-card p {
+    font-size: 11px;
+    padding: 8px 8px 10px;
+  }
+
+  .intro-item-pos-1 { left: 3%; top: 8%; }
+  .intro-item-pos-2 { right: 3%; top: 8%; }
+  .intro-item-pos-3 { left: 1%; top: 47%; }
+  .intro-item-pos-4 { right: 1%; top: 49%; }
+  .intro-item-pos-5 { left: 8%; bottom: 6%; }
+  .intro-item-pos-6 { right: 8%; bottom: 8%; }
+}
+
+/* ホーム開場アニメーション 終了 */

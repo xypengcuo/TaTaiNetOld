@@ -1,0 +1,23 @@
+# Windows 系统文件
+Thumbs.db
+Desktop.ini
+
+# macOS 系统文件
+.DS_Store
+
+# VS Code 本地设置，可按需要决定是否上传
+.vscode/
+
+# Node / npm 相关，如果以后使用 npm
+node_modules/
+npm-debug.log*
+
+# 临时文件
+*.tmp
+*.bak
+*.log
+
+# WordPress 敏感配置：如果以后误把整站放进来，避免上传数据库密码
+wp-config.php
+
+主题/这些文件都复制到Wordpress的主题中.txt

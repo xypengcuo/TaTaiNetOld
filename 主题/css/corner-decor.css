@@ -1,0 +1,97 @@
+/*
+  四角图片控制区域。
+  你的图片在 imgs/thema1 文件夹里，每个角使用对应图片：
+  corner-top-left.png       = 左上角
+  corner-top-right.png      = 右上角
+  corner-bottom-left.png    = 左下角
+  corner-bottom-right.png   = 右下角
+
+  使用方式：
+  1. HTML 里只写语义内容，并给每个 .border-item-1 一个唯一 id。
+  2. jQuery ready 之后调用 setupCornerDecor("#id", ["top-left"])。
+  3. JS 会自动给这个 DIV 加 corner-decor，并插入需要的 .corner-img 元素。
+*/
+.corner-decor {
+  /*
+    position: relative 是为了让四个角图片按这个 DIV 定位。
+    overflow: visible 是关键：角图片需要 3/4 在里面、约 1/4 在外面，
+    如果写成 hidden，伸出框外的部分会被裁掉。
+  */
+  position: relative;
+  overflow: visible;
+
+  /*
+    电脑端默认角图片尺寸和外移距离。
+    calc(var(--corner-size) / -3) 使用 -1/3 图片宽度，所以图片大约 1/3 在 DIV 外，2/3 在 DIV 内。
+  */
+  --corner-size: 50px;
+  --corner-offset: calc(var(--corner-size) / -2);
+}
+
+/*
+  让标题行和内容区形成独立层级。
+  角图会放在更高层，但文字区域本身也保留定位，方便以后继续微调。
+*/
+.corner-decor > :not(.corner-img) {
+  position: relative;
+  z-index: 2;
+}
+
+/*
+  左上角有角花时，JS 会给卡片添加 .corner-title-offset-left。
+  margin-left 由 JS 设置；这里调整圆角，避免标题条左边和角花重叠后显得太硬。
+*/
+.corner-title-offset-left .card-title {
+  border-top-left-radius: 0;
+}
+
+/*
+  四个角图片的通用样式。
+  JS 插入哪个 .corner-img 元素，哪个角就会显示。
+*/
+.corner-img {
+  position: absolute;
+  z-index: 3;
+  display: block;
+  width: var(--corner-size);
+  height: var(--corner-size);
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* 左上角图片位置：向左、向上各移动约 1/4 图片尺寸。 */
+.corner-img-top-left {
+  top: var(--corner-offset);
+  left: var(--corner-offset);
+  background-image: url("../imgs/thema1/corner_top_left.png");
+}
+
+/* 右上角图片位置：向右、向上各移动约 1/4 图片尺寸。 */
+.corner-img-top-right {
+  top: var(--corner-offset);
+  right: var(--corner-offset);
+  background-image: url("../imgs/thema1/corner_top_right.png");
+}
+
+/* 左下角图片位置：向左、向下各移动约 1/4 图片尺寸。 */
+.corner-img-bottom-left {
+  bottom: var(--corner-offset);
+  left: var(--corner-offset);
+  background-image: url("../imgs/thema1/corner_bottom_left.png");
+}
+
+/* 右下角图片位置：向右、向下各移动约 1/4 图片尺寸。 */
+.corner-img-bottom-right {
+  right: var(--corner-offset);
+  bottom: var(--corner-offset);
+  background-image: url("../imgs/thema1/corner_bottom_right.png");
+}
+
+/* 平板、手机不显示角装饰 */
+@media (max-width: 991.98px) {
+  .corner-img {
+    display: none !important;
+  }
+}

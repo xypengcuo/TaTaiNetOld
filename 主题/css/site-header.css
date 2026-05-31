@@ -1,0 +1,242 @@
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+}
+
+/* 分割线与上方阴影写在外层容器，便于控制整体边界 */
+#site-header {
+  border-bottom: 1px solid rgba(177, 141, 97, 0.24);
+  box-shadow: 0 10px 30px rgba(120, 80, 40, 0.14), 0 2px 6px rgba(120, 80, 40, 0.06);
+}
+
+body {
+  /*
+    需要避开 fixed 顶部导航。
+  */
+  padding-top: 90px !important;
+}
+
+/*
+  全站共通导航。
+  电脑端：网站名在左，主菜单在右。
+  平板/手机端：Bootstrap 自动把主菜单折叠进三条横杠按钮里。
+*/
+.site-nav {
+  position: static;
+  width: 100%;
+  min-height: 72px;
+  /* 保留背景与模糊，但分割线与阴影已移至 #site-header */
+  background: linear-gradient(180deg, rgba(255, 252, 243, 0.98) 0%, rgba(255, 245, 230, 0.96) 100%);
+  backdrop-filter: blur(12px);
+}
+
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  height: 72px;
+  padding: 0;
+  margin-right: 12px;
+}
+
+.site-brand-logo {
+  display: block;
+  height: 72px;   /* 图片高度 = 头部高度 */
+  width: auto;
+  max-width: none;
+}
+
+.site-brand:hover,
+.site-brand:focus {
+  opacity: 0.92;
+}
+
+/*
+  主菜单链接。
+  非当前页是普通链接；鼠标移入时背景和文字颜色变化，提示可以点击。
+*/
+.site-nav-link {
+  margin: 4px 2px;
+  padding: 8px 12px !important;
+  border-radius: 999px;
+  color: #665647;
+  font-size: 14px;
+  font-weight: 700;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.site-nav-link:hover,
+.site-nav-link:focus {
+  color: #2f7d67;
+  background: rgba(205, 235, 228, 0.72);
+  transform: translateY(-1px);
+}
+
+/*
+  当前页样式。
+  js/site-nav.js 会根据 window.currentPage 给对应菜单添加 active 和 aria-current。
+*/
+.site-nav-link.active {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #67b69f 0%, #3f8b74 100%);
+  box-shadow: 0 8px 18px rgba(63, 139, 116, 0.22);
+}
+
+/*
+  主菜单的子菜单。
+  使用 Bootstrap dropdown 结构，样式在这里统一调整成网站的柔和色系。
+*/
+.site-dropdown {
+  min-width: 220px;
+  padding: 10px;
+  border: 1px solid rgba(177, 141, 97, 0.26);
+  border-radius: 16px;
+  background: rgba(255, 248, 238, 0.98);
+  box-shadow: 0 16px 34px rgba(120, 80, 40, 0.14);
+}
+
+.site-dropdown-item {
+  padding: 9px 12px;
+  border-radius: 12px;
+  color: #665647;
+  font-size: 14px;
+  font-weight: 700;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.site-dropdown-item:hover,
+.site-dropdown-item:focus {
+  color: #2f7d67;
+  background: rgba(205, 235, 228, 0.82);
+  transform: translateX(2px);
+}
+
+/*
+  动画图标按钮。
+  这里先用文字图标做测试，不依赖额外图片文件；以后可以替换成 SVG 或 PNG。
+*/
+.member-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;          /* 和其他导航按钮高度接近 */
+  padding: 8px 12px;
+  margin-left: 4px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;              /* 去掉外框 */
+  box-shadow: none;          /* 去掉外框阴影 */
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.member-icon-link:hover,
+.member-icon-link:focus,
+.member-icon-link.active {
+  background: linear-gradient(135deg, #fff6e7 0%, #ffe7c3 100%);
+  border-color: rgba(251, 138, 0, 0.45);
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 22px rgba(120, 80, 40, 0.14),
+    0 0 0 1px rgba(255,255,255,0.40) inset;
+}
+
+.member-icon-play {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffedd6;
+  color: #8a4a00;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(120, 80, 40, 0.12);
+}
+
+.member-icon {
+  line-height: 1;
+  font-size: 18px;
+  color: #f2b600;
+  text-shadow:
+    0 0 6px rgba(255, 210, 80, 0.45),
+    0 2px 4px rgba(120, 80, 40, 0.10);
+}
+
+.member-icon-hint {
+  line-height: 1;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #7a5a44;
+}
+
+.site-nav-toggler {
+  border-color: rgba(177, 141, 97, 0.36);
+}
+
+.site-nav-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(103, 182, 159, 0.24);
+}
+
+/* =========================================================
+   平板版、手机版样式调整
+========================================================= */
+
+@media (max-width: 991.98px) {
+  body {
+    /*
+      需要避开 fixed 顶部导航。
+    */
+    padding-top: 81px !important;
+    /* padding-top: 64px; */
+  }
+
+  .site-nav {
+    min-height: 64px;
+  }
+
+  .site-brand {
+    font-size: 21px;
+  }
+
+  .navbar-collapse {
+    padding: 12px 0 8px;
+  }
+
+  .site-nav-link {
+    display: inline-flex;
+    margin: 3px 0;
+  }
+
+  .site-dropdown {
+    margin: 4px 0 10px;
+    padding: 8px;
+    border-radius: 14px;
+    box-shadow: none;
+  }
+
+  .member-icon-link {
+    margin: 8px 0 0;
+  }
+
+  .member-icon {
+    font-size: 19px;
+  }
+}
+
+@media (min-width: 992px) {
+  /* 消除父菜单和子菜单之间的缝隙，避免鼠标移动过去时误判离开 */
+  .nav-item.dropdown .site-dropdown {
+    margin-top: 0;
+  }
+}

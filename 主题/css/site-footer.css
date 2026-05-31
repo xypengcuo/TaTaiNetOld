@@ -1,0 +1,251 @@
+/*
+  共通 Footer 样式。
+
+  设计方针：
+  - 电脑版：左侧 LOGO + 说明，右侧重新展示导航菜单
+  - 平板版：LOGO 居中，菜单 3 列
+  - 手机版：LOGO 居中，菜单 2 列
+  - 最下面固定一行版权声明
+*/
+
+
+/* =========================================================
+   1. Footer 外层
+========================================================= */
+
+#site-footer {
+  display: block;
+  /* 分割线与向上阴影写在最外层容器，避免内部布局受影响 */
+  border-top: 1px solid rgba(177, 141, 97, 0.24);
+  box-shadow: 0 -10px 30px rgba(120, 80, 40, 0.14), 0 -2px 6px rgba(120, 80, 40, 0.06);
+}
+
+.site-footer-main {
+  /* 与 header 保持一致的分隔线并增加上方空间 */
+  margin-top: 64px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 252, 243, 0.98) 0%,
+      rgba(255, 245, 230, 0.96) 100%
+    );
+  color: #5c4a3d;
+}
+
+.site-footer-inner {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 3fr);
+  gap: 44px;
+  /* 增加内侧上边距，避免内容紧贴分隔线 */
+  padding-top: 60px;
+  padding-bottom: 36px;
+}
+
+
+/* =========================================================
+   2. Footer 左侧：LOGO 和说明
+========================================================= */
+
+.site-footer-brand {
+  min-width: 0;
+}
+
+.site-footer-logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.site-footer-logo {
+  display: block;
+  height: 68px;
+  width: auto;
+  max-width: 100%;
+}
+
+.site-footer-message {
+  margin: 18px 0 0;
+  color: #786a5d;
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   3. Footer 右侧：导航菜单
+========================================================= */
+
+.site-footer-nav {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.site-footer-group {
+  min-width: 0;
+}
+
+.site-footer-group-title {
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(103, 182, 159, 0.32);
+  color: #2f7d67;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
+.site-footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer-links li {
+  margin: 0;
+}
+
+.site-footer-links a {
+  display: inline-block;
+  padding: 5px 0;
+  color: #665647;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.site-footer-links a:hover,
+.site-footer-links a:focus {
+  color: #2f7d67;
+  transform: translateX(2px);
+}
+
+
+/* =========================================================
+   4. Footer 最下部：版权声明
+========================================================= */
+
+.site-footer-bottom {
+  border-top: 1px solid rgba(177, 141, 97, 0.18);
+  background: rgba(255, 248, 238, 0.82);
+}
+
+.site-footer-copyright {
+  margin: 0;
+  padding: 14px 0;
+  color: #7d6d5f;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+
+/* =========================================================
+   5. 平板版
+   768px ～ 991.98px
+========================================================= */
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .site-footer-main {
+    margin-top: 56px;
+  }
+
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-top: 48px;
+    padding-bottom: 30px;
+  }
+
+  .site-footer-brand {
+    text-align: center;
+  }
+
+  .site-footer-logo {
+    height: 62px;
+    margin: 0 auto;
+  }
+
+  .site-footer-message {
+    max-width: 560px;
+    margin: 16px auto 0;
+  }
+
+  /*
+    平板端：
+    导航菜单改成 3 列。
+    5组菜单会自动换行成两行。
+  */
+  .site-footer-nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px 28px;
+  }
+}
+
+
+/* =========================================================
+   6. 手机版
+   小于 768px
+========================================================= */
+
+@media (max-width: 767.98px) {
+  .site-footer-main {
+    margin-top: 48px;
+  }
+
+  .site-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    padding-top: 40px;
+    padding-bottom: 26px;
+  }
+
+  .site-footer-brand {
+    text-align: center;
+  }
+
+  .site-footer-logo {
+    height: 54px;
+    margin: 0 auto;
+  }
+
+  .site-footer-message {
+    max-width: 92%;
+    margin: 14px auto 0;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  /*
+    手机端：
+    菜单使用 2 列显示。
+    比单列更短，也不会像 3 列那样拥挤。
+  */
+  .site-footer-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 18px;
+  }
+
+  .site-footer-group-title {
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    font-size: 13px;
+  }
+
+  .site-footer-links a {
+    padding: 4px 0;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .site-footer-copyright {
+    padding: 12px 0;
+    font-size: 11px;
+  }
+}

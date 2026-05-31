@@ -1,0 +1,103 @@
+<!--
+  共通顶部导航 HTML。
+  这里只写菜单结构：左边网站标题、大菜单、子菜单。
+  当前页样式由 js/site-header.js 根据 window.currentPage 自动添加。
+
+  注意：这个文件会被 js/site-header.js 以 AJAX 方式加载到每个页面的 #site-header 元素里，
+  所以这里的路径都是相对于每个页面的，而不是相对于这个 HTML 文件的。
+
+  img和a标签的路径不能用 WordPress 的 PHP 函数生成，因为这个 HTML 文件不是通过 PHP 直接加载的。
+  需要设定为 {{themeUri}}/imgs/logo.png 这样的格式，然后在 js/site-header.js 里替换成正确的 URL。
+  主题URL：{{themeUri}}
+  首页URL：{{siteUrl}}
+
+  WordPress 主题化后的链接规则：
+  1. 首页不要写 index.htm，直接写 {{siteUrl}}site_brand
+  2. 固定ページ不要写 families.htm，而是写 {{siteUrl}}families/
+  3. 这些 slug 需要以后在 WordPress 后台创建固定ページ时保持一致
+-->
+<nav class="site-nav navbar navbar-expand-lg" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand site-brand" href="{{siteUrl}}" aria-label="さいたま多胎ネット">
+      <img class="site-brand-logo" src="{{themeUri}}/imgs/logo.png" alt="さいたま多胎ネット">
+    </a>
+
+    <button
+      class="navbar-toggler site-nav-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#site-main-nav"
+      aria-controls="site-main-nav"
+      aria-expanded="false"
+      aria-label="メニューを開く"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="site-main-nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item">
+          <a class="nav-link site-nav-link" data-page="top_page" href="{{siteUrl}}">ホーム</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link site-nav-link dropdown-toggle" data-page="families" href="{{siteUrl}}families/" role="button" data-bs-toggle="dropdown" aria-expanded="false">多胎家庭の方へ</a>
+          <ul class="dropdown-menu site-dropdown">
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}families/">はじめての方へ</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}support-services/">支援制度・サービス</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}classes/">教室・交流会</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}resources/">資料・便利グッズ</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link site-nav-link dropdown-toggle" data-page="supporters" href="{{siteUrl}}supporters/" role="button" data-bs-toggle="dropdown" aria-expanded="false">会員・サポーター</a>
+          <ul class="dropdown-menu site-dropdown">
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}membership/">会員について</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}peer-supporters/">ピアサポーターについて</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}join/">入会・登録申込</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link site-nav-link dropdown-toggle" data-page="news" href="{{siteUrl}}news/" role="button" data-bs-toggle="dropdown" aria-expanded="false">お知らせ・イベント</a>
+          <ul class="dropdown-menu site-dropdown">
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}news/">お知らせ一覧</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}events/">開催予定・申込</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}event-reports/">開催レポート</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link site-nav-link dropdown-toggle" data-page="reports" href="{{siteUrl}}reports/" role="button" data-bs-toggle="dropdown" aria-expanded="false">活動報告</a>
+          <ul class="dropdown-menu site-dropdown">
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}reports/">活動報告一覧</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}media/">メディア掲載</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}gallery/">配布資料・ギャラリー</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link site-nav-link dropdown-toggle" data-page="about" href="{{siteUrl}}about/" role="button" data-bs-toggle="dropdown" aria-expanded="false">団体について</a>
+          <ul class="dropdown-menu site-dropdown">
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}about/">団体概要</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}partners/">協力・助成団体</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}links/">SNS・外部リンク</a></li>
+            <li><a class="dropdown-item site-dropdown-item" href="{{siteUrl}}contact/">お問い合わせ</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link member-icon-link intro-trigger-link"
+            href="#"
+            aria-label="オープニング演出を再生"
+            title="オープニング演出を再生"
+          >
+            <span class="member-icon" aria-hidden="true">✨</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,98 @@
+<!--
+  共通 Footer HTML。
+  这里只写 Footer 的结构：LOGO、说明、底部导航、版权声明。
+
+  注意：
+  这个文件会被 js/site-footer.js 以 AJAX 方式加载到每个页面的 #site-footer 元素里。
+  所以这里不能写 WordPress 的 PHP 函数。
+
+  主题URL：{{themeUri}}
+  首页URL：{{siteUrl}}
+  当前年份：{{year}}
+
+  链接规则：
+  1. 首页使用 {{siteUrl}}
+  2. 固定ページ使用 {{siteUrl}}families/ 这样的形式
+  3. 这些 slug 需要以后在 WordPress 后台创建固定ページ时保持一致
+-->
+
+<div class="site-footer-main">
+  <div class="container site-footer-inner">
+
+    <!-- Footer 左侧：LOGO 和说明 -->
+    <div class="site-footer-brand">
+      <a class="site-footer-logo-link" href="{{siteUrl}}" aria-label="さいたま多胎ネット ホーム">
+        <img
+          class="site-footer-logo"
+          src="{{themeUri}}/imgs/logo.png"
+          alt="さいたま多胎ネット"
+        >
+      </a>
+
+      <p class="site-footer-message">
+        多胎家庭が安心してつながり、支え合える地域づくりを目指しています。
+      </p>
+    </div>
+
+    <!-- Footer 右侧：导航菜单 -->
+    <nav class="site-footer-nav" aria-label="フッターナビゲーション">
+
+      <div class="site-footer-group">
+        <p class="site-footer-group-title">多胎家庭の方へ</p>
+        <ul class="site-footer-links">
+          <li><a href="{{siteUrl}}families/">はじめての方へ</a></li>
+          <li><a href="{{siteUrl}}support-services/">支援制度・サービス</a></li>
+          <li><a href="{{siteUrl}}classes/">教室・交流会</a></li>
+          <li><a href="{{siteUrl}}resources/">資料・便利グッズ</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer-group">
+        <p class="site-footer-group-title">会員・サポーター</p>
+        <ul class="site-footer-links">
+          <li><a href="{{siteUrl}}membership/">会員について</a></li>
+          <li><a href="{{siteUrl}}peer-supporters/">ピアサポーターについて</a></li>
+          <li><a href="{{siteUrl}}join/">入会・登録申込</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer-group">
+        <p class="site-footer-group-title">お知らせ・イベント</p>
+        <ul class="site-footer-links">
+          <li><a href="{{siteUrl}}news/">お知らせ一覧</a></li>
+          <li><a href="{{siteUrl}}events/">開催予定・申込</a></li>
+          <li><a href="{{siteUrl}}event-reports/">開催レポート</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer-group">
+        <p class="site-footer-group-title">活動報告</p>
+        <ul class="site-footer-links">
+          <li><a href="{{siteUrl}}reports/">活動報告一覧</a></li>
+          <li><a href="{{siteUrl}}media/">メディア掲載</a></li>
+          <li><a href="{{siteUrl}}gallery/">配布資料・ギャラリー</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer-group">
+        <p class="site-footer-group-title">団体について</p>
+        <ul class="site-footer-links">
+          <li><a href="{{siteUrl}}about/">団体概要</a></li>
+          <li><a href="{{siteUrl}}partners/">協力・助成団体</a></li>
+          <li><a href="{{siteUrl}}links/">SNS・外部リンク</a></li>
+          <li><a href="{{siteUrl}}contact/">お問い合わせ</a></li>
+        </ul>
+      </div>
+
+    </nav>
+  </div>
+</div>
+
+<!-- Footer 最下部：版权声明 -->
+<div class="site-footer-bottom">
+  <div class="container">
+    <p class="site-footer-copyright">
+      © {{year}} NPO法人さいたま多胎ネット. All Rights Reserved.
+    </p>
+  </div>
+</div>

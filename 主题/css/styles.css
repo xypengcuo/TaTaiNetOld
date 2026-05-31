@@ -1,0 +1,616 @@
+﻿/*
+  这个文件只写项目自己的样式。
+  Bootstrap 负责“几列布局”和响应式断点；
+  这里负责页面颜色、卡片背景、文字样式、首页模块等项目自定义样式。
+
+  响应式规则：
+  1. 默认样式 = 电脑版
+  2. 平板版 = 768px ～ 991.98px
+  3. 手机版 = 小于 768px
+
+  注意：
+  平板版和手机版的 @media 统一放在文件最下面，方便维护。
+*/
+
+/* =========================================================
+   1. 全局变量
+========================================================= */
+
+:root {
+  --page-bg-color: #FFFCF3;
+  --desktop-container-width: 1140px;
+}
+
+
+/* =========================================================
+   2. 全局基础样式
+   默认按电脑版写
+========================================================= */
+
+body {
+  min-height: 100vh;
+  color: #4f4136;
+  font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+  background: var(--page-bg-color);
+}
+
+/*
+  Bootstrap 5 的 .container 在超大屏默认会到 1320px。
+  这里统一限制为 1140px。
+*/
+.container {
+  max-width: var(--desktop-container-width);
+  margin-top: 0;
+  padding-top: 0 !important;
+}
+
+
+/* =========================================================
+   3. 首页主视觉文字
+   默认按电脑版写
+========================================================= */
+
+/*
+  主文案容器：
+  电脑版放在左侧，并纵向居中。
+*/
+.main-visual-copy {
+  position: absolute;
+  left: 5.5%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 80%;
+  max-width: 80%;
+}
+
+
+/* =========================================================
+   4. 顶部说明区域
+   现在这个区域可能已经被トルツメ，但样式先保留
+========================================================= */
+
+section#card-row-head {
+  margin-top: 0;
+}
+
+section#card-row-head .border-item-1 {
+  padding: 20px;
+}
+
+/* 英文弱提示 */
+.demo-label {
+  margin: 0 0 6px;
+  color: #a46d3a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* 主信息 */
+.demo-sub {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #3e6f63;
+}
+
+/* 说明文字 */
+.demo-desc {
+  margin: 0;
+  font-size: 14px;
+  color: #7d7d7d;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   5. 共通行布局
+========================================================= */
+
+section.demo-row {
+  margin: 20px 0;
+}
+
+.demo-row-title {
+  margin: 0 0 10px;
+  color: #7d6048;
+  font-weight: 700;
+}
+
+/*
+  让同一行里的所有 DIV 自动等高。
+
+  原理：
+  1. Bootstrap 的 .row 默认就是 display:flex。
+  2. 这里让每个 col 也变成 flex 容器。
+  3. .border-item-1 使用 flex:1 和 width:100%，就会跟随本行最高的卡片自动拉齐。
+
+  >：子元素选择器，只选“直接子元素”，不包含孙子元素。
+  [class*="col-"]：匹配 class 属性中包含 “col-” 的元素。
+*/
+section.demo-row .row > [class*="col-"] {
+  display: flex;
+}
+
+
+/* =========================================================
+   6. 共通卡片样式
+========================================================= */
+
+/*
+  核心 DIV 样式：border-item-1。
+  负责卡片基础效果：背景色、边框、圆角、内边距、最小高度。
+*/
+.border-item-1 {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid rgba(177, 141, 97, 0.32);
+  border-radius: 22px;
+  background-color: #fff3dd;
+  box-shadow: 0 14px 30px rgba(120, 80, 40, 0.12);
+}
+
+/*
+  卡片标题行。
+  高度用 min-height，不写死整张卡片高度；
+  标题文字变多时仍然可以自然撑开。
+*/
+.card-title {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 12px 24px;
+  border-radius: 21px 21px 0 0;
+  color: #4f6756;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid rgba(143, 184, 169, 0.42);
+}
+
+/* 标题栏渐变背景色：粉色 */
+.card-title-bgcolor-pink {
+  background: linear-gradient(
+    90deg,
+    #fff6fb 0%,
+    #ffe9f6 40%,
+    #ffd8ef 100%
+  );
+}
+
+/* 标题栏渐变背景色：蓝色 */
+.card-title-bgcolor-blue {
+  background: linear-gradient(
+    90deg,
+    #f2fbff 0%,
+    #e3f6ff 40%,
+    #cfefff 100%
+  );
+}
+
+/* 标题栏渐变背景色：绿色 */
+.card-title-bgcolor-green {
+  background: linear-gradient(
+    90deg,
+    #f3fbf7 0%,
+    #e2f5ec 40%,
+    #cdebdc 100%
+  );
+}
+
+/* 标题栏渐变背景色：黄色 */
+.card-title-bgcolor-yellow {
+  background: linear-gradient(
+    90deg,
+    #fff8f2 0%,
+    #ffe9d6 40%,
+    #ffdcc2 100%
+  );
+}
+
+/*
+  卡片内容区。
+  flex:1 让内容区填满剩余高度，
+  所以同一行等高时，标题和内容视觉也会对齐。
+*/
+.card-body {
+  flex: 1 1 auto;
+  padding: 24px 28px 28px;
+}
+.card-body p {
+  margin: 0 0 10px;
+  line-height: 1.75;
+}
+
+.card-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* 填充整个 div 宽度的图片 */
+.card-fill-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+
+/* =========================================================
+   7. 首页主菜单：3个图片卡片
+   默认按电脑版写
+========================================================= */
+
+#main-menu {
+  max-width: 100%;
+}
+
+/* 所有媒体都保持 3 列横排 */
+#main-menu .col-4 {
+  padding: 0.75rem;
+}
+
+#main-menu .row.g-4 {
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+  margin-top: -0.75rem;
+  margin-bottom: -0.75rem;
+}
+
+#main-menu .image-link-card {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  border-radius: 28px;
+  transition: transform 0.28s ease, filter 0.28s ease;
+}
+
+#main-menu .image-link-card:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+#main-menu .square-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: 24px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#main-menu .card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+#main-menu .card-text {
+  position: relative;
+  z-index: 2;
+
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+
+  padding: 0 1.2rem 1.8rem;
+
+  -webkit-text-stroke: 4px #ffffff;
+  paint-order: stroke fill;
+
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.88),
+    0 0 14px rgba(255, 255, 255, 0.68),
+    0 3px 10px rgba(0, 0, 0, 0.18);
+}
+
+/* 文字颜色 */
+#main-menu .text-pink {
+  color: #8a0f4d;
+}
+
+#main-menu .text-blue {
+  color: #004a80;
+}
+
+#main-menu .text-orange {
+  color: #7a3a00;
+}
+
+/* 发光边框：粉色 */
+#main-menu .glow-pink .square-card {
+  border: 3px solid #ff4fb3;
+  background-color: #ff4fb3;
+}
+
+/* 发光边框：蓝色 */
+#main-menu .glow-blue .square-card {
+  border: 3px solid #23c8ff;
+  background-color: #23c8ff;
+}
+
+#main-menu .glow-orange .square-card {
+  border: 3px solid #ff991a;
+  background-color: #ff991a;
+}
+
+/* =========================================================
+   8. お知らせ
+========================================================= */
+
+.notice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.notice-item {
+  display: flex;
+  margin-top: 20px;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: #2f2f2f;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.notice-item:first-child {
+  margin-top: 0;
+}
+.notice-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
+.notice-icon {
+  flex: 0 0 auto;
+  font-size: 24px;
+  line-height: 1;
+  margin-top: 2px;
+}
+.notice-text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.notice-label {
+  font-size: 14px;
+  font-weight: 800;
+  color: #2d4f4c;
+}
+.notice-text {
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 700;
+  color: #2e2e2e;
+}
+.notice-date {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #6f6f6f;
+  font-weight: 700;
+}
+
+/* 最新通知 */
+.notice-item-latest {
+  border-width: 2px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+    0 10px 20px rgba(0, 0, 0, 0.06);
+}
+
+.notice-item-latest .notice-label {
+  color: #c2547b;
+}
+
+.notice-item-latest .notice-text {
+  font-size: 16px;
+}
+
+/* 通知背景色：粉色 */
+.notice-bg-pink {
+  border: 2px solid #ff4fb3;
+  background: linear-gradient(
+    90deg,
+    #fff4fa 0%,
+    #ffe3f3 55%,
+    #ffd2ea 100%
+  );
+}
+
+/* 通知背景色：蓝色 */
+.notice-bg-blue {
+  border: 2px solid #23c8ff;
+  background: linear-gradient(
+    90deg,
+    #f0fbff 0%,
+    #dff4ff 55%,
+    #ccecff 100%
+  );
+}
+
+/* 通知背景色：绿色 */
+.notice-bg-green {
+  border: 2px solid #3dbb8b;
+  background: linear-gradient(
+    90deg,
+    #f2fbf8 0%,
+    #def5ec 55%,
+    #c8ecdf 100%
+  );
+}
+
+/* 通知背景色：橙色 */
+.notice-bg-orange {
+  border: 2px solid #fb8a00;
+  background: linear-gradient(
+    90deg,
+    #fff6ee 0%,
+    #ffe7d2 55%,
+    #ffd8b8 100%
+  );
+}
+
+/* 通知背景色：灰色 */
+.notice-bg-gray {
+  border: 2px solid #d0d0d0;
+  background: linear-gradient(
+    90deg,
+    #fafafa 0%,
+    #f0f0f0 100%
+  );
+}
+
+
+/* =========================================================
+   9. 平板版
+   768px ～ 991.98px
+========================================================= */
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /*
+    首页主视觉文字：
+    平板端保持左侧显示，但缩小宽度和文字尺寸。
+  */
+  .main-visual-copy {
+    left: 4.5%;
+    top: 50%;
+    width: 58%;
+    max-width: 58%;
+  }
+
+  .main-visual-copy p {
+    -webkit-text-stroke: 1.4px #ffffff;
+  }
+
+  .main-visual-line1 {
+    font-size: clamp(20px, 2.3vw, 30px);
+  }
+  /* 填充整个 div 宽度的图片 */
+  .card-fill-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .main-visual-line2 {
+    margin-top: 6px !important;
+    font-size: clamp(28px, 3.15vw, 40px);
+  }
+
+  /*
+    首页主菜单：
+    平板端仍然保持3列，但缩小间距、圆角和文字。
+  */
+  #main-menu .col-4 {
+    padding: 0.45rem;
+  }
+
+  #main-menu .row.g-4 {
+    margin-left: -0.45rem;
+    margin-right: -0.45rem;
+    margin-top: -0.45rem;
+    margin-bottom: -0.45rem;
+  }
+
+  #main-menu .square-card {
+    border-radius: 18px;
+  }
+
+  #main-menu .card-text {
+    font-size: 0.82rem;
+    -webkit-text-stroke: 1.5px #ffffff;
+    padding: 0 0.2rem 0.35rem;
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+}
+
+
+/* =========================================================
+   10. 手机版
+   小于 768px
+========================================================= */
+
+@media (max-width: 767.98px) {
+  /*
+    首页主视觉文字：
+    手机端放到底部居中，避免压到人物主体。
+  */
+  .main-visual-copy {
+    left: 50%;
+    top: auto;
+    bottom: 8%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: none;
+    text-align: center;
+  }
+
+  .main-visual-copy p {
+    -webkit-text-stroke: 1px #ffffff;
+  }
+
+  .main-visual::after {
+    height: 52%;
+  }
+
+  /*
+    共通卡片：
+    手机端整体缩小内边距和标题高度。
+  */
+  .border-item-1 {
+    min-height: 160px;
+  }
+
+  .card-title {
+    min-height: 48px;
+    padding: 10px 18px;
+    font-size: 17px;
+  }
+
+  .card-body {
+    padding: 20px 22px 22px;
+  }
+
+  /*
+    首页主菜单：
+    手机端仍然保持3列横排。
+    为了保证三张卡片都能放下，进一步缩小间距、圆角和文字。
+  */
+  #main-menu .col-4 {
+    padding: 0.2rem;
+  }
+
+  #main-menu .row.g-4 {
+    margin-left: -0.2rem;
+    margin-right: -0.2rem;
+    margin-top: -0.2rem;
+    margin-bottom: -0.2rem;
+  }
+
+  #main-menu .square-card {
+    border-radius: 14px;
+  }
+
+  #main-menu .card-text {
+    font-size: clamp(0.62rem, 2.4vw, 0.82rem);
+    -webkit-text-stroke: 1.1px #ffffff;
+    padding: 0 0.08rem 0.18rem;
+    line-height: 1.03;
+    letter-spacing: -0.01em;
+  }
+}
